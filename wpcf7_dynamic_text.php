@@ -4,7 +4,7 @@
 Plugin Name: Contact Form 7 - Dynamic Text Extension
 Plugin URI: http://http://sevenspark.com/wordpress-plugins/contact-form-7-dynamic-text-extension
 Description: Provides a dynamic text field that accepts any shortcode to generate the content.  Requires Contact Form 7
-Version: 1.0
+Version: 1.0.1
 Author: Chris Mavricos, SevenSpark
 Author URI: http://sevenspark.com
 License: GPL2
@@ -30,14 +30,17 @@ License: GPL2
 /**
  ** A base module for [dynamictext], [dynamictext*]
  **/
-if(function_exists('wpcf7_add_shortcode')){
+function wpcf7_dynamictext_init(){
+	if(function_exists('wpcf7_add_shortcode')){
+		
+	/* Shortcode handler */
 	
-/* Shortcode handler */
-
-wpcf7_add_shortcode( 'dynamictext', 'wpcf7_dynamictext_shortcode_handler', true );
-wpcf7_add_shortcode( 'dynamictext*', 'wpcf7_dynamictext_shortcode_handler', true );
-
+	wpcf7_add_shortcode( 'dynamictext', 'wpcf7_dynamictext_shortcode_handler', true );
+	wpcf7_add_shortcode( 'dynamictext*', 'wpcf7_dynamictext_shortcode_handler', true );
+	
+	}
 }
+add_action( 'plugins_loaded', 'wpcf7_dynamictext_init');
 
 function wpcf7_dynamictext_shortcode_handler( $tag ) {
 	global $wpcf7_contact_form;
@@ -223,9 +226,9 @@ function wpcf7_tg_pane_dynamictext( $type = 'dynamictext' ) {
  */
 function cf7_get($atts){
 	extract(shortcode_atts(array(
-		'val' => 0,
+		'key' => 0,
 	), $atts));
-	$auction = urldecode($_GET[$val]);
+	$auction = urldecode($_GET[$key]);
 	return $auction;
 }
 add_shortcode('CF7_GET', 'cf7_get');
