@@ -4,7 +4,7 @@ Donate link: http://bit.ly/bVogDN
 Tags: Contact Form 7, Contact, Contact Form, dynamic, text, input, GET, 
 Requires at least: 2.9
 Tested up to: 3.0.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 This plugin provides a new tag type for the Contact Form 7 Plugin. It allows the dynamic generation of content for a text input box via any shortcode. 
 
@@ -42,8 +42,8 @@ familiar to Contact Form 7 users. There are two important fields:
 
 This field takes a shortcode, with two important provisions:
 
-	1. The shortcode should NOT include the normal square brackets ([ and ]). So, instead of [CF7_GET val='value'] you would use CF7_GET val='value' .
-	2. Any parameters in the shortcode must use single quotes. That is: CF7_GET val='value' and not CF7_GET val="value"
+	1. The shortcode should NOT include the normal square brackets ([ and ]). So, instead of [CF7_GET key='value'] you would use CF7_GET key='value' .
+	2. Any parameters in the shortcode must use single quotes. That is: CF7_GET key='value' and not CF7_GET key="value"
 	
 **Uneditable Option**
 
@@ -61,10 +61,10 @@ http://mysite.com?foo=bar
 
 Enter the following into the "Dynamic Value" input
 
-CF7_GET val='foo'
+CF7_GET key='foo'
 Your Content Form 7 Tag will look something like this:
 
-[dynamictext dynamicname "CF7_GET val='foo'"]
+[dynamictext dynamicname "CF7_GET key='foo'"]
 
 Your form's dynamicname text input will then be pre-populated with the value of foo, in this case, bar
 
@@ -106,8 +106,8 @@ None.  Yet.
 
 == Changelog ==
 
-= 1.0 =
-* The first version.  Ever.
+= 1.0.1 =
+* Fixed dependency issue.
 
 
 == Upgrade Notice ==
