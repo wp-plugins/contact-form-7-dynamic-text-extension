@@ -4,7 +4,7 @@
 Plugin Name: Contact Form 7 - Dynamic Text Extension
 Plugin URI: http://sevenspark.com/wordpress-plugins/contact-form-7-dynamic-text-extension
 Description: Provides a dynamic text field that accepts any shortcode to generate the content.  Requires Contact Form 7
-Version: 1.0.1
+Version: 1.0.2
 Author: Chris Mavricos, SevenSpark
 Author URI: http://sevenspark.com
 License: GPL2
@@ -31,14 +31,20 @@ License: GPL2
  ** A base module for [dynamictext], [dynamictext*]
  **/
 function wpcf7_dynamictext_init(){
+
 	if(function_exists('wpcf7_add_shortcode')){
-		
-	/* Shortcode handler */
-	
-	wpcf7_add_shortcode( 'dynamictext', 'wpcf7_dynamictext_shortcode_handler', true );
-	wpcf7_add_shortcode( 'dynamictext*', 'wpcf7_dynamictext_shortcode_handler', true );
+
+		/* Shortcode handler */		
+		wpcf7_add_shortcode( 'dynamictext', 'wpcf7_dynamictext_shortcode_handler', true );
+		wpcf7_add_shortcode( 'dynamictext*', 'wpcf7_dynamictext_shortcode_handler', true );
 	
 	}
+	
+	add_filter( 'wpcf7_validate_dynamictext', 'wpcf7_dynamictext_validation_filter', 10, 2 );
+	add_filter( 'wpcf7_validate_dynamictext*', 'wpcf7_dynamictext_validation_filter', 10, 2 );
+	
+	add_action( 'admin_init', 'wpcf7_add_tag_generator_dynamictext', 15 );
+	
 }
 add_action( 'plugins_loaded', 'wpcf7_dynamictext_init');
 
@@ -133,9 +139,6 @@ function wpcf7_dynamictext_shortcode_handler( $tag ) {
 
 /* Validation filter */
 
-add_filter( 'wpcf7_validate_dynamictext', 'wpcf7_dynamictext_validation_filter', 10, 2 );
-add_filter( 'wpcf7_validate_dynamictext*', 'wpcf7_dynamictext_validation_filter', 10, 2 );
-
 function wpcf7_dynamictext_validation_filter( $result, $tag ) {
 	global $wpcf7_contact_form;
 
@@ -157,12 +160,11 @@ function wpcf7_dynamictext_validation_filter( $result, $tag ) {
 
 /* Tag generator */
 
-add_action( 'admin_init', 'wpcf7_add_tag_generator_dynamictext', 15 );
-
 function wpcf7_add_tag_generator_dynamictext() {
-	wpcf7_add_tag_generator( 'dynamictext', __( 'Dynamic Text field', 'wpcf7' ),
-		'wpcf7-tg-pane-dynamictext', 'wpcf7_tg_pane_dynamictext_' );
-
+	if(function_exists('wpcf7_add_tag_generator')){
+		wpcf7_add_tag_generator( 'dynamictext', __( 'Dynamic Text field', 'wpcf7' ),
+			'wpcf7-tg-pane-dynamictext', 'wpcf7_tg_pane_dynamictext_' );
+	}
 }
 
 function wpcf7_tg_pane_dynamictext_( &$contact_form ) {

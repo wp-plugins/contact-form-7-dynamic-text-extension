@@ -4,7 +4,7 @@ Donate link: http://bit.ly/bVogDN
 Tags: Contact Form 7, Contact, Contact Form, dynamic, text, input, GET, 
 Requires at least: 2.9
 Tested up to: 3.0.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 
 This plugin provides a new tag type for the Contact Form 7 Plugin. It allows the dynamic generation of content for a text input box via any shortcode. 
 
@@ -108,6 +108,9 @@ None.  Yet.
 
 = 1.0.1 =
 * Fixed dependency issue.
+
+= 1.0.2 =
+* Fixed administrative control panel dependency issue
 
 
 == Upgrade Notice ==
