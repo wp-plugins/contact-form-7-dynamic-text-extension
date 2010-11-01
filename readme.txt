@@ -1,10 +1,10 @@
 === Contact Form 7 Dynamic Text Extension ===
 Contributors: sevenspark
 Donate link: http://bit.ly/bVogDN
-Tags: Contact Form 7, Contact, Contact Form, dynamic, text, input, GET, 
+Tags: Contact Form 7, Contact, Contact Form, dynamic, text, input, GET, POST, title, slug
 Requires at least: 2.9
 Tested up to: 3.0.1
-Stable tag: 1.0.1
+Stable tag: 1.0.3
 
 This plugin provides a new tag type for the Contact Form 7 Plugin. It allows the dynamic generation of content for a text input box via any shortcode. 
 
@@ -17,7 +17,7 @@ One thing it doesn't handle, however, is dynamic content. Any default values in 
 with pre-populated fields based on some other value? Some examples might include:
 
 * Auto-filling a URL
-* Auto-filling a Post ID
+* Auto-filling a Post ID, title, or slug
 * Pre-populating a Product Number
 * Referencing other content on the site
 
@@ -42,8 +42,9 @@ familiar to Contact Form 7 users. There are two important fields:
 
 This field takes a shortcode, with two important provisions:
 
-	1. The shortcode should NOT include the normal square brackets ([ and ]). So, instead of [CF7_GET key='value'] you would use CF7_GET key='value' .
-	2. Any parameters in the shortcode must use single quotes. That is: CF7_GET key='value' and not CF7_GET key="value"
+1. The shortcode should NOT include the normal square brackets ([ and ]). So, instead of [CF7_GET key='value'] you would use CF7_GET key='value' .
+2. Any parameters in the shortcode must use single quotes. That is: CF7_GET key='value' and not CF7_GET key="value"
+	
 	
 **Uneditable Option**
 
@@ -62,11 +63,26 @@ http://mysite.com?foo=bar
 Enter the following into the "Dynamic Value" input
 
 CF7_GET key='foo'
+
 Your Content Form 7 Tag will look something like this:
 
 [dynamictext dynamicname "CF7_GET key='foo'"]
 
 Your form's dynamicname text input will then be pre-populated with the value of foo, in this case, bar
+
+
+**PHP POST Variables**
+
+New in version 1.0.3!
+
+Grab variables from the $_POST array.  The shortcode is much like the GET shortcode:
+
+CF7_POST key='foo'
+
+Your Content Form 7 Tag will look something like this:
+
+[dynamictext dynamicname "CF7_POST key='foo'"]
+
 
 **Blog Info**
 
@@ -82,6 +98,33 @@ Your Content Form 7 Tag will look something like this:
 
 Your form's dynamicname text input will then be pre-populated with your site's URL
 
+
+**Post Info**
+
+New in version 1.0.3!
+
+Retrieve information about the current post/page (that the contact form is displayed on).  The shortcode works as follows:
+
+CF7_get_post_var key='title'      <-- retrieves the Post's Title
+CF7_get_post_var key='slug'       <-- retrieves the Post's Slug
+
+You can also retrieve any parameter from the $post object.  Just set that as the key value, for example 'post_date'
+
+The Contact Form 7 Tag would look like:
+
+[dynamictext dynamicname "CF7_get_post_var key='title'"]
+
+**Current URL**
+
+New in version 1.0.3!
+
+Retrieve the current URL.  The shortcode takes no parameters:
+
+CF7_URL
+
+So your Contact Form 7 Tag would look like:
+
+[dynamictext dynamicname "CF7_URL"]
 
 
 == Installation ==
@@ -109,7 +152,15 @@ None.  Yet.
 = 1.0.1 =
 * Fixed dependency issue.
 
+= 1.0.2 =
+* Fixed administrative control panel dependency issue
+
+= 1.0.3 =
+* Added $_POST shortcode
+* Added current post/page variable shortcode
+* Added current URL shortcode
+
 
 == Upgrade Notice ==
 
-Nothing yet.
+Upgrading gives you new features and fixes!
