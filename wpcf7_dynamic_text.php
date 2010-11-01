@@ -270,7 +270,7 @@ function cf7_get_post_var($atts){
 	}
 	
 	global $post;
-	echo '<pre>'; print_r($post); echo '</pre>';
+	//echo '<pre>'; print_r($post); echo '</pre>';
 	$val = $post->$key;
 	return $val;
 }
