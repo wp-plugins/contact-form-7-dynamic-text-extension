@@ -230,8 +230,8 @@ function cf7_get($atts){
 	extract(shortcode_atts(array(
 		'key' => 0,
 	), $atts));
-	$auction = urldecode($_GET[$key]);
-	return $auction;
+	$value = urldecode($_GET[$key]);
+	return $value;
 }
 add_shortcode('CF7_GET', 'cf7_get');
 
@@ -244,5 +244,49 @@ function cf7_bloginfo($atts){
 	return get_bloginfo($show);
 }
 add_shortcode('CF7_bloginfo', 'cf7_bloginfo');
+
+function cf7_post($atts){
+	extract(shortcode_atts(array(
+		'key' => -1,
+	), $atts));
+	if($key == -1) return '';
+	$val = $_POST[$key];
+	return $val;
+}
+add_shortcode('CF7_POST', 'cf7_post');
+
+function cf7_get_post_var($atts){
+	extract(shortcode_atts(array(
+		'key' => 'post_title',
+	), $atts));
+	
+	switch($key){
+		case 'slug':
+			$key = 'post_name';
+			break;
+		case 'title':
+			$key = 'post_title';
+			break;
+	}
+	
+	global $post;
+	echo '<pre>'; print_r($post); echo '</pre>';
+	$val = $post->$key;
+	return $val;
+}
+add_shortcode('CF7_get_post_var', 'cf7_get_post_var');
+
+function cf7_url(){
+	$pageURL = 'http';
+ 	if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+ 	$pageURL .= "://";
+ 	if ($_SERVER["SERVER_PORT"] != "80") {
+  		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+ 	} else {
+  		$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+ 	}
+ 	return $pageURL;	
+}
+add_shortcode('CF7_URL', 'cf7_url');
 
 ?>
