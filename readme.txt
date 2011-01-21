@@ -3,39 +3,43 @@ Contributors: sevenspark
 Donate link: http://bit.ly/bVogDN
 Tags: Contact Form 7, Contact, Contact Form, dynamic, text, input, GET, POST, title, slug
 Requires at least: 2.9
-Tested up to: 3.0.1
-Stable tag: 1.0.3
+Tested up to: 3.0.4
+Stable tag: 1.0.4
 
-This plugin provides a new tag type for the Contact Form 7 Plugin. It allows the dynamic generation of content for a text input box via any shortcode. 
+This plugin provides 2 new tag types for the Contact Form 7 Plugin. It allows the dynamic generation of content for a text input box via any shortcode.
+It also offers dynamic hidden field functionality, which can be utilized to dynamically set the Email Recipient (To:) address. 
 
 == Description ==
 
-Contact Form 7 is an excellent WordPress plugin that provides all sorts of flexible features for creating Contact Forms. I've used it on a variety 
-of sites with great success.
-
-One thing it doesn't handle, however, is dynamic content. Any default values in Contact Form 7 are static. But what if I wanted a Contact Form 
-with pre-populated fields based on some other value? Some examples might include:
+Contact Form 7 is an excellent WordPress plugin, and the CF7 DTX Plugin makes it even more awesome by adding dynamic content capabilities.
+While default values in Contact Form 7 are static. CF7 DTX lets you create pre-populated fields based on other values.  Some examples might include:
 
 * Auto-filling a URL
 * Auto-filling a Post ID, title, or slug
 * Pre-populating a Product Number
 * Referencing other content on the site
+* Populating with post info 
+* Populating with user info
+* Populating with custom fields
+* Any value you can write a shortcode for
 
-There are many more case-specific examples. I searched for a solution, and there are some decent hacks out there. Many of them are explored in this 
-forum topic: [Contact Form 7 Input Fields Values as PHP Get-Viarables](http://wordpress.org/support/topic/contact-form-7-input-fields-values-as-php-get-viarables). 
-However, they all involved hacking the current Contact Form 7 code, which means next time the plugin is updated their edits will be overwritten. Oops.
+There are many more case-specific examples. I searched for a solution, and there are some decent hacks out there. Many of them are 
+explored in this forum topic: 
+[Contact Form 7 Input Fields Values as PHP Get-Viarables](http://wordpress.org/support/topic/contact-form-7-input-fields-values-as-php-get-viarables). 
+However, they all involved hacking the current Contact Form 7 code, which means next time the plugin is updated their edits will be 
+overwritten. That's bad.
 
 This Dynamic Text Extension plugin provides a more elegant solution that leaves the Contact Form 7 Plugin intact.
 
 = WHAT DOES IT DO? =
 
 This plugin provides a new tag type for the Contact Form 7 Plugin. It allows the dynamic generation of content for a text input box via any shortcode. 
-For example, it comes with two built-in shortcodes that will allow the Contact Form to be populated from any $_GET PHP variable or any info from the 
-get_bloginfo() function.
+For example, it comes with several built-in shortcodes that will allow the Contact Form to be populated from any $_GET PHP variable or any info from the 
+get_bloginfo() function, among others.  See below for included shortcodes.
 
 = HOW TO USE IT =
 
-After installing and activating the plugin, the Contact Form 7 tag generator will have a new tag type: Dynamic Text Field. Most of the options will be 
+After installing and activating the plugin, the Contact Form 7 tag generator will have 2 new tag types: Dynamic Text Field and Dynamic Hidden Field. Most of the options will be 
 familiar to Contact Form 7 users. There are two important fields:
 
 **Dynamic Value**
@@ -48,7 +52,7 @@ This field takes a shortcode, with two important provisions:
 	
 **Uneditable Option**
 
-As these types of fields should often remain uneditable by the user, there is a checkbox to turn this option on.
+As these types of fields should often remain uneditable by the user, there is a checkbox to turn this option on (Not applicable for hidden fields).
 
 
 = INCLUDED SHORTCODES =
@@ -126,13 +130,43 @@ So your Contact Form 7 Tag would look like:
 
 [dynamictext dynamicname "CF7_URL"]
 
+**Custom Fields**
+
+New in version 1.0.4!
+
+Retrieve custom fields from the current post/page.  Just set the custom field as the key in the shortcode.
+
+The dynamic value input becomes:
+
+CF7_get_custom_field key='my_custom_field'
+
+And the tag looks like this:
+
+[dynamictext dynamicname "CF7_get_custom_field key='my_custom_field'"]
+
+For the purposes of including an email address, you can obfuscate the custom field value by setting obfuscate='on' in the shortcode.
+
+**Current User Info**
+
+Get data about the current user - assuming they are logged in.  Defaults to user name, but you can set the key to any valid value in 
+http://codex.wordpress.org/Function_Reference/get_currentuserinfo 
+
+CF7_get_current_user
+
+[dynamictext dynamicname "CF7_get_current_user"]
+
+
+Like the Dynamic Text Extension?  Please consider supporting its development by [Donating](http://bit.ly/bVogDN).
+
+Or check out my upcoming premium plugin, [UberMenu - WordPress Mega Menu Plugin](http://wpmegamenu.com)
+
 
 == Installation ==
 
 This section describes how to install the plugin and get it working.
 
 1. Download and install the Contact Form 7 Plugin located at http://wordpress.org/extend/plugins/contact-form-7/
-1. Upload the plugin folder to the `/wp-content/plugins/` directory
+1. Upload the plugin folder to the '/wp-content/plugins/' directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. You will now have a "Dynamic Text" tag option in the Contact Form 7 tag generator
 
@@ -149,18 +183,23 @@ None.  Yet.
 
 == Changelog ==
 
-= 1.0.1 =
-* Fixed dependency issue.
-
-= 1.0.2 =
-* Fixed administrative control panel dependency issue
+= 1.0.4 -
+* Added Current User Info shortcode
+* Added Post Custom Field shortcode (with obfuscation support)
+* Added Hidden Field capability
 
 = 1.0.3 =
 * Added $_POST shortcode
 * Added current post/page variable shortcode
 * Added current URL shortcode
 
+= 1.0.2 =
+* Fixed administrative control panel dependency issue
+
+= 1.0.1 =
+* Fixed dependency issue.
+
 
 == Upgrade Notice ==
 
-Upgrading gives you new features and fixes!
+The newest upgrade includes hidden field capability and two new shortcodes - current user info and custom post fields.
