@@ -183,7 +183,7 @@ None.  Yet.
 
 == Changelog ==
 
-= 1.0.4 -
+= 1.0.4 =
 * Added Current User Info shortcode
 * Added Post Custom Field shortcode (with obfuscation support)
 * Added Hidden Field capability
