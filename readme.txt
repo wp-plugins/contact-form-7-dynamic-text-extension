@@ -4,7 +4,7 @@ Donate link: http://bit.ly/bVogDN
 Tags: Contact Form 7, Contact, Contact Form, dynamic, text, input, GET, POST, title, slug
 Requires at least: 2.9
 Tested up to: 3.0.4
-Stable tag: 1.0.4.1
+Stable tag: 1.0.4.2
 
 This plugin provides 2 new tag types for the Contact Form 7 Plugin. It allows the dynamic generation of content for a text input box via any shortcode.
 It also offers dynamic hidden field functionality, which can be utilized to dynamically set the Email Recipient (To:) address. 
@@ -183,6 +183,9 @@ None.  Yet.
 
 == Changelog ==
 
+= 1.0.4.2 =
+* Fixed a bug that created repeating square brackets around dynamic text values in cases where the form doesn't validate and JavaScript is deactivated.
+
 = 1.0.4.1 =
 * Removed trailing whitespace to fix "Headers already sent" errors
 
@@ -204,6 +207,7 @@ None.  Yet.
 
 
 == Upgrade Notice ==
+1.0.4.2 fixes a bug that occurs when JavaScript is disabled and a form item doesn't validate on the first try
 1.0.4.1 fixes a "Headers already sent" error that can occur for some users.
 
-The newest upgrade includes hidden field capability and two new shortcodes - current user info and custom post fields.
+1.0.4 upgrade includes hidden field capability and two new shortcodes - current user info and custom post fields.
