@@ -4,13 +4,13 @@
 Plugin Name: Contact Form 7 - Dynamic Text Extension
 Plugin URI: http://sevenspark.com/wordpress-plugins/contact-form-7-dynamic-text-extension
 Description: Provides a dynamic text field that accepts any shortcode to generate the content.  Requires Contact Form 7
-Version: 1.0.4.2
+Version: 1.1
 Author: Chris Mavricos, SevenSpark
 Author URI: http://sevenspark.com
 License: GPL2
 */
 
-/*  Copyright 2010-2011  Chris Mavricos, SevenSpark (email : chris@sevenspark.com)
+/*  Copyright 2010-2014  Chris Mavricos, SevenSpark (email : chris@sevenspark.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as 
@@ -48,7 +48,7 @@ function wpcf7_dynamictext_init(){
 	add_action( 'admin_init', 'wpcf7_add_tag_generator_dynamichidden', 16 );
 	
 }
-add_action( 'plugins_loaded', 'wpcf7_dynamictext_init');
+add_action( 'plugins_loaded', 'wpcf7_dynamictext_init' , 20 );
 
 /*************************************************************
  * DynamicText Shortcode
@@ -349,7 +349,10 @@ function cf7_get($atts){
 	extract(shortcode_atts(array(
 		'key' => 0,
 	), $atts));
-	$value = urldecode($_GET[$key]);
+	$value = '';
+	if( isset( $_GET[$key] ) ){
+		$value = urldecode($_GET[$key]);
+	}
 	return $value;
 }
 add_shortcode('CF7_GET', 'cf7_get');
@@ -370,7 +373,10 @@ function cf7_post($atts){
 		'key' => -1,
 	), $atts));
 	if($key == -1) return '';
-	$val = $_POST[$key];
+	$val = '';
+	if( isset( $_POST[$key] ) ){
+		$val = $_POST[$key];
+	}
 	return $val;
 }
 add_shortcode('CF7_POST', 'cf7_post');
@@ -455,6 +461,14 @@ function cf7_get_current_user($atts){
 	return $val;
 }
 add_shortcode('CF7_get_current_user', 'cf7_get_current_user');
+
+
+
+function cf7_get_referrer( $atts ){
+	return isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '';
+}
+add_shortcode( 'CF7_referrer' , 'cf7_get_referrer' );
+
 
 function cf7dtx_obfuscate($val){
 	$link = '';
