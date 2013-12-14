@@ -3,8 +3,8 @@ Contributors: sevenspark
 Donate link: http://bit.ly/bVogDN
 Tags: Contact Form 7, Contact, Contact Form, dynamic, text, input, GET, POST, title, slug
 Requires at least: 2.9
-Tested up to: 3.0.4
-Stable tag: 1.0.4.2
+Tested up to: 3.8
+Stable tag: 1.1
 
 This plugin provides 2 new tag types for the Contact Form 7 Plugin. It allows the dynamic generation of content for a text input box via any shortcode.
 It also offers dynamic hidden field functionality, which can be utilized to dynamically set the Email Recipient (To:) address. 
@@ -155,6 +155,12 @@ CF7_get_current_user
 
 [dynamictext dynamicname "CF7_get_current_user"]
 
+**Referrer URL**
+
+Get the referral URL, if it exists.  Note that this is not necessarily reliable as not all browsers send this data.
+
+[dynamictext dynamicname "CF7_referrer"]
+
 
 Like the Dynamic Text Extension?  Please consider supporting its development by [Donating](http://bit.ly/bVogDN).
 
@@ -182,6 +188,10 @@ None.  Yet.
 
 
 == Changelog ==
+
+= 1.1 =
+* Updated for compatibility with Contact Form 7 v3.6
+* Added Referrer shortcode
 
 = 1.0.4.2 =
 * Fixed a bug that created repeating square brackets around dynamic text values in cases where the form doesn't validate and JavaScript is deactivated.
